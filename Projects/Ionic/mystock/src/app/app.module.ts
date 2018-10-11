@@ -9,6 +9,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StockProvider } from '../providers/stock/stock';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { firebaseConfig } from '../credentials';
+
 @NgModule({
   declarations: [
     MyApp
@@ -17,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

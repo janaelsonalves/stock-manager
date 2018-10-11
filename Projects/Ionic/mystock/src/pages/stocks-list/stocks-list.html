@@ -18,6 +18,12 @@
 
 <ion-content padding>
 
+  <ion-fab bottom right>
+    <button ion-fab mini color="secondary" (click)="goStockForm()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  
   <ion-list>
     <button ion-item *ngFor="let stock of stocks" (click)="openDetail(stock)">
       {{stock.symbol}}

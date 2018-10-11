@@ -24,8 +24,11 @@ export class StocksListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StocksListPage');
-    this.stockProvider.getStocks()
+    this.stockProvider.getSharesPurchased()
+      .valueChanges()
       .subscribe(stocks => {
+        console.log(stocks);
+
         this.stocks = stocks;
       })
   }
@@ -34,4 +37,7 @@ export class StocksListPage {
     this.navCtrl.push('StockDetailPage', { stock: stock });
   }
 
+  goStockForm() {
+    this.navCtrl.push('StockFormPage')
+  }
 }
