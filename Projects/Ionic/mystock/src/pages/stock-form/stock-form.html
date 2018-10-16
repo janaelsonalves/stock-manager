@@ -6,23 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar text-center>
+  <ion-navbar text-center hideBackButton="false">
     <ion-title>Adding Stock</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<!-- <ion-content padding>
 
   <form [formGroup]="stockForm" (ngSubmit)="addStock()">
     <ion-item>
       <ion-label stacked>Papel/Código: </ion-label>
       <ion-input type="text" formControlName="symbol"></ion-input>
-      <!-- <p>Your choosen name: {{ stockForm.get('symbol').value }}</p>
-      <div *ngIf="stockForm.get('symbol').hasError('required')">
-        Oops, please provide a symbol!
-      </div> -->
     </ion-item>
 
     <ion-item>
@@ -63,4 +59,61 @@
     </div>
   </form>
 
+</ion-content> -->
+
+<ion-content padding>
+  <form [formGroup]="stockForm" (ngSubmit)="addStock()">
+    <ion-item>
+      <ion-label stacked>Trading: </ion-label>
+      <ion-select formControlName="trading">
+        <ion-option value="purchase">Purchase</ion-option>
+        <ion-option value="sale">Sale</ion-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="!(stockForm.get('trading').value)" class="error">
+      Symbol is required
+    </div>
+    <ion-item>
+      <ion-label stacked>Symbol: </ion-label>
+      <ion-input type="text" placeholder="PETR4" formControlName="symbol"></ion-input>
+    </ion-item>
+    <div *ngIf="!(stockForm.get('symbol').untouched || stockForm.get('symbol').value)" class="error">
+      Symbol is required
+    </div>
+    <ion-item>
+      <ion-label stacked>Quantity: </ion-label>
+      <ion-input type="number" placeholder="100" formControlName="quantity"></ion-input>
+    </ion-item>
+    <div *ngIf="!(stockForm.get('quantity').untouched || stockForm.get('quantity').value)" class="error">
+      Quantity is required
+    </div>
+    <ion-item>
+      <ion-label stacked>Price: </ion-label>
+      <ion-input type="number" step="0.01" placeholder="0.00" formControlName="price"></ion-input>
+    </ion-item>
+    <div *ngIf="!(stockForm.get('price').untouched || stockForm.get('price').value)" class="error">
+      Price is required
+    </div>
+    <ion-item>
+      <ion-label stacked>Brokerage: </ion-label>
+      <ion-input type="number" step="0.01" placeholder="0.00" formControlName="brokerage"></ion-input>
+    </ion-item>
+    <div *ngIf="!(stockForm.get('brokerage').untouched || stockForm.get('brokerage').value)" class="error">
+      Brokerage is required
+    </div>
+    <ion-item>
+      <ion-label stacked>Others Fees: </ion-label>
+      <ion-input type="number" step="0.01" placeholder="0.00" formControlName="others_fees"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="getLiquidValue()" no-lines>
+      <p><strong>Total Expenses: </strong>{{getTotalExpenses()}}</p>
+      <p><strong>Liquid Value: </strong>{{getLiquidValue()}}</p>
+    </ion-item>
+    <div padding>
+      <button ion-button full round type="submit">
+        Add
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+  </form>
 </ion-content>
