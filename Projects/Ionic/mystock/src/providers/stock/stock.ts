@@ -16,6 +16,10 @@ export class StockProvider {
   stocks: Array<Stock>;
   private collection = 'purchases';
 
+  private alphaVantageApiKey = "TKZ5TR4ZXUYH4NFW";
+  private alphaVantageApi = "https://www.alphavantage.co";
+
+  
   constructor(public http: HttpClient, private firestore: AngularFirestore) {
     console.log('Hello StockProvider Provider');
     this.stocks = [
@@ -27,17 +31,21 @@ export class StockProvider {
       { symbol: "BBAS3", price: 35.01, quantity: 400, fees: 1.1, sale_fee: 0.75, iss: 1.5 },
     ]
   }
-
+  
   getStocks(): Observable<Array<Stock>> {
     return Observable.create(observer => {
       observer.next(this.stocks);
     })
   }
-
+  
   getSharesPurchased(): AngularFirestoreCollection<any> {
     return this.firestore.collection(this.collection);
   }
 
+  searchStocksBy(keywords: string) {
+    return this.http.get(`${this.alphaVantageApi}/query?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${this.alphaVantageApiKey}`)
+  }
+  
   addStock(stock: any): Promise<any> {
     let id = this.firestore.createId();
     return this.firestore.collection(this.collection).doc(id).set(stock);

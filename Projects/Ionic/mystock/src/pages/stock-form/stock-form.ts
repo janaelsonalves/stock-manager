@@ -19,6 +19,7 @@ import { Stock } from '../../models/stock';
 export class StockFormPage {
 
   stockForm: FormGroup;
+  private filteredStocks: Array<any>;
 
   constructor(public navCtrl: NavController, public builder: FormBuilder, public loadingCtrl: LoadingController, public stockProvider: StockProvider) {
 
@@ -36,7 +37,7 @@ export class StockFormPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');    
+    console.log('ionViewDidLoad AboutPage');
   }
 
   getTradingValue(): number {
@@ -94,5 +95,17 @@ export class StockFormPage {
     }).catch((err) => {
       console.log('Failed: ', err)
     })
+  }
+
+  onKey(event: any) {
+    this.stockProvider.searchStocksBy(event.target.value)
+      .subscribe((result: any) => {
+        this.filteredStocks = result.bestMatches;
+        console.log(result.bestMatches);
+      });
+  }
+
+  setStockSymbol(stock: any){
+    this.stockForm.get('symbol').setValue(stock);
   }
 }

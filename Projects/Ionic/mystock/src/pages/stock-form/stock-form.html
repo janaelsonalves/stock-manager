@@ -70,12 +70,19 @@
         <ion-option value="sale">Sale</ion-option>
       </ion-select>
     </ion-item>
+    <div class="filtered-stocks" *ngIf="filteredStocks">
+      <ion-list>
+        <button ion-item *ngFor="let stock of filteredStocks" (click)="setStockSymbol(stock)">
+          {{stock['1. symbol']}}
+        </button>
+      </ion-list>
+    </div>
     <div *ngIf="!(stockForm.get('trading').value)" class="error">
       Symbol is required
     </div>
     <ion-item>
       <ion-label stacked>Symbol: </ion-label>
-      <ion-input type="text" placeholder="PETR4" formControlName="symbol"></ion-input>
+      <ion-input type="text" placeholder="ABCD4" formControlName="symbol" (keyup)="onKey($event)"></ion-input>
     </ion-item>
     <div *ngIf="!(stockForm.get('symbol').untouched || stockForm.get('symbol').value)" class="error">
       Symbol is required
