@@ -16,8 +16,11 @@
 <ion-content padding>
 
   <ion-card>
-    <ion-card-header text-center>Info</ion-card-header>
+    <ion-card-header text-center>{{stock.trading}}</ion-card-header>
     <ion-card-content>
+      <ion-item>
+        Date: {{stock.createdAt}}
+      </ion-item>
       <ion-item>
         Symbol: {{stock.symbol}}
       </ion-item>
@@ -30,6 +33,20 @@
       <ion-item>
         Total Value: {{(stock.quantity * stock.price)}}
       </ion-item>
+      <ion-row>
+        <ion-col>
+          <button full ion-button icon-start color="secondary">
+            <ion-icon name="create"></ion-icon>
+            <div>Edit</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button full ion-button icon-start color="danger" (click)="deleteStock()">
+            <ion-icon name="trash"></ion-icon>
+            <div>Delete</div>
+          </button>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 

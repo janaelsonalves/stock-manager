@@ -8,4 +8,9 @@ page-stock-form {
         color: red;
         padding-left: 16px;
     }
+
+    .filtered-tocks{
+        position: absolute;
+        z-index: 999;
+    }
 }

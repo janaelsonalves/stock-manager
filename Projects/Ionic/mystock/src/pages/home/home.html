@@ -17,5 +17,15 @@
 
 
 <ion-content padding>
-
+  <ion-input type="search" placeholder="Search City" (ionInput)="filterCities()"></ion-input>
+  <ion-list>
+    <ion-item (click)="onClick($event)">BSB</ion-item>
+    <ion-item (click)="onClick($event)">SP</ion-item>
+    <ion-item (click)="onClick($event)">GYN</ion-item>
+    <ion-item (click)="onClick($event)">BH</ion-item>
+    <ion-item (click)="onClick($event)">CWB </ion-item>
+  </ion-list>
+  <ion-input type="text" placeholder="Name"></ion-input>
+  <ion-input type="text" placeholder="Last Name"></ion-input>
+  <ion-input type="text" placeholder="Alias"></ion-input>
 </ion-content>

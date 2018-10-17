@@ -26,13 +26,16 @@ export class StockFormPage {
     this.stockForm = builder.group({
       trading: ['purchase', Validators.required],
       symbol: ['', Validators.required],
+      createdAt: ['', Validators.required],
       quantity: ['', Validators.required],
       price: ['', Validators.required],
       brokerage: ['', Validators.required],
       others_fees: [''],
     })
 
-    console.log(this.stockForm);
+    this.stockForm.get('symbol').valueChanges.subscribe(value => {
+      console.log(value)
+    });
 
   }
 
@@ -76,11 +79,6 @@ export class StockFormPage {
     return parseFloat(this.stockForm.get('others_fees').value);
   }
 
-
-  onSubmit() {
-    console.log(this.stockForm.value);
-  }
-
   addStock() {
     console.log(this.stockForm.value);
     let loading = this.loadingCtrl.create({
@@ -105,7 +103,10 @@ export class StockFormPage {
       });
   }
 
-  setStockSymbol(stock: any){
-    this.stockForm.get('symbol').setValue(stock);
+  selectStock(event: Event, stock) {
+    console.log('Selected Value: ', event.returnValue);
+    this.stockForm.get('symbol').setValue(stock['1. symbol']);
+    this.filteredStocks = [];
+    event.stopPropagation();
   }
 }
