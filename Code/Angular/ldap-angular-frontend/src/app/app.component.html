@@ -1,0 +1,28 @@
+<div class="search-bar">
+  <label>
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Search users by uid, dn, cn, sn"
+    />
+    <button (key)="searchUser()" type="submit">Search</button>
+  </label>
+</div>
+
+<div class="results">Value: {{ searchControl?.value }}</div>
+
+<div>
+  <ul>
+    <li *ngFor="let user of users">
+      <p><strong>UID: </strong>{{ user.uid }}</p>
+      <p><strong>DN: </strong>{{ user.dn }}</p>
+      <p><strong>CN: </strong>{{ user.cn }}</p>
+      <p><strong>SN: </strong>{{ user.sn }}</p>
+      <p><strong>Full Name: </strong>{{ user.fullName }}</p>
+      <p><strong>Given name: </strong>{{ user.givenName }}</p>
+      <p><strong>OU: </strong>{{ user.ou }}</p>
+    </li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>
